@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#if( !defined( NULL ) )
+    #define NULL        0
+#endif
+
 typedef int8_t      sint8;
 typedef uint8_t     uint8;
 

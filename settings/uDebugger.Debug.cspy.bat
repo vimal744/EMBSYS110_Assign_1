@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\settings\uDebugger.Debug.general.xcl" --backend -f "C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\settings\uDebugger.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "C:\Users\mehta\Documents\GitHub\EMBSYS110_Assign_1\settings\uDebugger.Debug.general.xcl" --backend -f "C:\Users\mehta\Documents\GitHub\EMBSYS110_Assign_1\settings\uDebugger.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\settings\uDebugger.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\settings\uDebugger.Debug.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "C:\Users\mehta\Documents\GitHub\EMBSYS110_Assign_1\settings\uDebugger.Debug.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\mehta\Documents\GitHub\EMBSYS110_Assign_1\settings\uDebugger.Debug.driver.xcl" 
 
 @echo off 
 :end

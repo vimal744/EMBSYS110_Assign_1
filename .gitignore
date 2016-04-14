@@ -1,3 +1,10 @@
+# Ignore the Debug folder
+Debug/
+
+# Ignore the Debug folder
+Settings/
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

@@ -21,7 +21,7 @@ void SystemInit(void);
 void main()
 {
     Hw_init();
-    
+
     PrintString(clr_scrn); /* Clear entire screen */
     PrintString("University of Washington - Debugger Test Application \n");
 
