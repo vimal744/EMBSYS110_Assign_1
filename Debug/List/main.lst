@@ -1,0 +1,209 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.50.3.10732/W32 for ARM       14/Apr/2016  18:17:07
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\App\main.c
+#    Command line =  
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\App\main.c
+#        -D USE_STDPERIPH_DRIVER -D STM32F401xx -lCN
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Debug\List
+#        -o
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Debug\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M4 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench
+#        7.3\arm\INC\c\DLib_Config_Normal.h" -I .\ -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Util\
+#        -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\BSP\
+#        -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\BSP\CMSIS\
+#        -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\BSP\ST\StdPeripheralDrivers\
+#        -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Task\
+#        -I
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Types\
+#        -On
+#    List file    =  
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Debug\List\main.lst
+#    Object file  =  
+#        C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\Debug\Obj\main.o
+#
+###############################################################################
+
+C:\Users\mehta\Desktop\STM32F401\E110\Assignment_1\uDebugger_vimalm\App\main.c
+      1          /*
+      2           * University of Washington
+      3           * Certificate in Embedded and Real-Time Systems
+      4           *
+      5           * uDebugger homework
+      6           */
+      7          #include "bsp.h"
+      8          #include "print.h"
+      9          
+     10          #include "TYPS_pub.h"
+     11          
+     12          
+
+   \                                 In section .data, align 4
+     13          char clr_scrn[] = { 27, 91, 50, 74, 0 };              // esc[2J
+   \                     clr_scrn:
+   \   00000000   0x1B 0x5B          DC8 27, 91, 50, 74, 0, 0, 0, 0
+   \              0x32 0x4A    
+   \              0x00 0x00    
+   \              0x00 0x00    
+     14          /* Public variables ----------------------------------------------------------*/
+
+   \                                 In section .bss, align 4
+     15          PRINT_DEFINEBUFFER();           /* required for lightweight sprintf */
+   \                     stringbuffer:
+   \   00000000                      DS8 256
+     16          /* Private prototype ---------------------------------------------------------*/
+     17          
+     18          void SystemInit(void);
+     19          
+     20          
+
+   \                                 In section .text, align 2, keep-with-next
+     21          void main()
+     22          {
+   \                     main: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     23              Hw_init();
+   \   00000002   0x.... 0x....      BL       Hw_init
+     24              
+     25              PrintString(clr_scrn); /* Clear entire screen */
+   \   00000006   0x....             LDR.N    R0,??DataTable0
+   \   00000008   0x.... 0x....      BL       PrintString
+     26              PrintString("University of Washington - Debugger Test Application \n");
+   \   0000000C   0x....             LDR.N    R0,??DataTable0_1
+   \   0000000E   0x.... 0x....      BL       PrintString
+     27          
+     28          
+     29              PrintString("\nFail! Should not arrive here.\n");
+   \   00000012   0x....             LDR.N    R0,??DataTable0_2
+   \   00000014   0x.... 0x....      BL       PrintString
+     30              while(1);
+   \                     ??main_0: (+1)
+   \   00000018   0xE7FE             B.N      ??main_0
+     31          }
+     32          
+     33          
+
+   \                                 In section .text, align 4, keep-with-next
+     34          void SystemInit(void)
+     35          {
+     36            // System init is called from the assembly .s file
+     37            // We will configure the clocks in hw_init
+     38            asm("nop");
+   \                     SystemInit: (+1)
+   \   00000000   0xBF00             nop
+     39          }
+   \   00000002   0x4770             BX       LR               ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable0:
+   \   00000000   0x........         DC32     clr_scrn
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable0_1:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable0_2:
+   \   00000000   0x........         DC32     ?_1
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x55 0x6E          DC8 55H, 6EH, 69H, 76H, 65H, 72H, 73H, 69H
+   \              0x69 0x76    
+   \              0x65 0x72    
+   \              0x73 0x69    
+   \   00000008   0x74 0x79          DC8 74H, 79H, 20H, 6FH, 66H, 20H, 57H, 61H
+   \              0x20 0x6F    
+   \              0x66 0x20    
+   \              0x57 0x61    
+   \   00000010   0x73 0x68          DC8 73H, 68H, 69H, 6EH, 67H, 74H, 6FH, 6EH
+   \              0x69 0x6E    
+   \              0x67 0x74    
+   \              0x6F 0x6E    
+   \   00000018   0x20 0x2D          DC8 20H, 2DH, 20H, 44H, 65H, 62H, 75H, 67H
+   \              0x20 0x44    
+   \              0x65 0x62    
+   \              0x75 0x67    
+   \   00000020   0x67 0x65          DC8 67H, 65H, 72H, 20H, 54H, 65H, 73H, 74H
+   \              0x72 0x20    
+   \              0x54 0x65    
+   \              0x73 0x74    
+   \   00000028   0x20 0x41          DC8 20H, 41H, 70H, 70H, 6CH, 69H, 63H, 61H
+   \              0x70 0x70    
+   \              0x6C 0x69    
+   \              0x63 0x61    
+   \   00000030   0x74 0x69          DC8 74H, 69H, 6FH, 6EH, 20H, 0AH, 0
+   \              0x6F 0x6E    
+   \              0x20 0x0A    
+   \              0x00         
+   \   00000037   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x0A 0x46          DC8 "\012Fail! Should not arrive here.\012"
+   \              0x61 0x69    
+   \              0x6C 0x21    
+   \              0x20 0x53    
+   \              0x68 0x6F    
+   \              0x75 0x6C    
+   \              0x64 0x20    
+   \              0x6E 0x6F    
+   \              0x74 0x20    
+   \              0x61 0x72    
+   \              0x72 0x69    
+   \              0x76 0x65    
+   \              0x20 0x68    
+   \              0x65 0x72    
+   \              0x65 0x2E    
+   \              0x0A 0x00    
+     40            
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   SystemInit
+       8   main
+         8   -> Hw_init
+         8   -> PrintString
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable0
+       4  ??DataTable0_1
+       4  ??DataTable0_2
+      56  ?_0
+      32  ?_1
+       4  SystemInit
+       8  clr_scrn
+      26  main
+     256  stringbuffer
+
+ 
+ 256 bytes in section .bss
+   8 bytes in section .data
+  88 bytes in section .rodata
+  42 bytes in section .text
+ 
+  42 bytes of CODE  memory
+  88 bytes of CONST memory
+ 264 bytes of DATA  memory
+
+Errors: none
+Warnings: none
