@@ -2193,7 +2193,7 @@
   <group>
     <name>Task</name>
     <file>
-      <name>$PROJ_DIR$\Task\task_cs.c</name>
+      <name>$PROJ_DIR$\Task\TASK_cs.s</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Task\TASK_pub.h</name>

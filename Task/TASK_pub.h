@@ -35,7 +35,7 @@ typedef uint8 TASK_cs_err_type; enum
  *            ERR_BUSY     Object was already initialized
  *            ERR_PARAM    The parameter was NULL
  */
-TASK_cs_err_type InitializeCriticalSection(TASK_cs_type* pCS);
+extern TASK_cs_err_type InitializeCriticalSection(TASK_cs_type* pCS);
 
 /**
  * Attempt to take a critical section

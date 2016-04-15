@@ -483,7 +483,8 @@
         </option>
         <option>
           <name>ADefines</name>
-          <state></state>
+          <state>USE_STDPERIPH_DRIVER</state>
+          <state>STM32F401xx</state>
         </option>
         <option>
           <name>AList</name>
@@ -579,7 +580,13 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state></state>
+          <state>.\</state>
+          <state>$PROJ_DIR$\Util</state>
+          <state>$PROJ_DIR$\BSP</state>
+          <state>$PROJ_DIR$\BSP\CMSIS</state>
+          <state>$PROJ_DIR$\BSP\ST\StdPeripheralDrivers</state>
+          <state>$PROJ_DIR$\Task</state>
+          <state>$PROJ_DIR$\Types</state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -2026,7 +2033,7 @@
   <group>
     <name>Task</name>
     <file>
-      <name>$PROJ_DIR$\Task\task_cs.c</name>
+      <name>$PROJ_DIR$\Task\TASK_cs.s</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Task\TASK_pub.h</name>
