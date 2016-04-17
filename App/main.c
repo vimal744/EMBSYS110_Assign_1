@@ -30,6 +30,7 @@ void main()
     ut_cs();
  
     PrintString("\nDone.\n");
+    while(1);
 }
 
 

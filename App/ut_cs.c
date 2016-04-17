@@ -119,7 +119,7 @@ UT( CS_Test_Delete_AlreadyLocked_Failed )
     return UT_PASSED;
 }
 
-UT( CS_Test_Delete_NoEnterLeave_Success )
+UT( CS_Test_Delete_NoEnterNoLeave_Success )
 {
     TASK_cs_type myCS;
 
@@ -129,7 +129,7 @@ UT( CS_Test_Delete_NoEnterLeave_Success )
     return UT_PASSED;
 }
 
-UT( CS_Test_Delete_AfterEnterLeave_Success )
+UT( CS_Test_Delete_EnterAndLeave_Success )
 {
     TASK_cs_type myCS;
 
@@ -140,6 +140,75 @@ UT( CS_Test_Delete_AfterEnterLeave_Success )
 
     return UT_PASSED;
 }
+
+UT( CS_Test_MultipleEnter_Failed )
+{
+    TASK_cs_type myCS;
+
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      InitializeCriticalSection( &myCS ) );
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      EnterCriticalSection( &myCS )      );
+    ASSERT_EQ( TASK_CS_ERR_ALRDY_LOCKED, EnterCriticalSection( &myCS )      );
+
+    return UT_PASSED;
+}
+
+UT( CS_Test_MultipleEnterLeave_Success )
+{
+    TASK_cs_type myCS;
+
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      InitializeCriticalSection( &myCS ) );
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      EnterCriticalSection( &myCS )      );
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      LeaveCriticalSection( &myCS )      );
+
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      EnterCriticalSection( &myCS )      );
+    ASSERT_EQ( TASK_CS_ERR_SUCCESS,      LeaveCriticalSection( &myCS )      );
+
+    return UT_PASSED;
+}
+
+
+UT( CS_Test_MultipleCSEnterLeave_Success )
+{
+    #define ARRAY_CNT ( 10 )
+
+    TASK_cs_type myCS[10];
+    uint8        i;
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_SUCCESS, InitializeCriticalSection( &( myCS[i] ) ) );
+    }
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_SUCCESS, EnterCriticalSection( &( myCS[i] ) ) );
+    }
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_ALRDY_LOCKED, EnterCriticalSection( &( myCS[i] ) ) );
+    }
+
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_SUCCESS, LeaveCriticalSection( &( myCS[i] ) ) );
+    }
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_NOT_LOCKED, LeaveCriticalSection( &( myCS[i] ) ) );
+    }
+
+
+    for( i = 0; i < ARRAY_CNT; i++ )
+    {
+        ASSERT_EQ( TASK_CS_ERR_SUCCESS, DeleteCriticalSection( &( myCS[i] ) ) );
+    }
+
+    return UT_PASSED;
+}
+
 
 
 void ut_cs( void )
@@ -159,8 +228,13 @@ void ut_cs( void )
     UTRUN( CS_Test_Delete_NullParam_Failed );
     UTRUN( CS_Test_Delete_Uninited_Failed );
     UTRUN( CS_Test_Delete_AlreadyLocked_Failed );
-    UTRUN( CS_Test_Delete_NoEnterLeave_Success );
-    UTRUN( CS_Test_Delete_AfterEnterLeave_Success );
+    UTRUN( CS_Test_Delete_NoEnterNoLeave_Success );
+    UTRUN( CS_Test_Delete_EnterAndLeave_Success );
+
+    UTRUN( CS_Test_MultipleEnter_Failed );
+    UTRUN( CS_Test_MultipleEnterLeave_Success );
+    UTRUN( CS_Test_MultipleCSEnterLeave_Success );
+
 
     UTTOTALS();
 }
