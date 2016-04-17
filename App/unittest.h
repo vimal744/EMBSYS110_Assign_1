@@ -1,16 +1,21 @@
-#pragma once
+#ifndef UNIT_TEST_H
+#define UNIT_TEST_H
+
 #include <stdio.h>
 #include <stdbool.h>
+#include "print.h"
 
 
-#define UTPRINT printf
+#define UTPRINT Util_Printf
 
 #define __utname__ __func__
 
-typedef enum {
+typedef enum
+{
     UT_SKIPPED,
     UT_FAILED,
     UT_PASSED,
+
 } UTResult_t;
 
 #define UTGLOBALS()                 static unsigned __UTPassed = 0; static unsigned __UTTestCount=0; static unsigned __UTSkipped=0;
@@ -33,6 +38,8 @@ typedef enum {
 
 #define UT(testname)                static UTResult_t  ut_##testname(void)
 #define UTRUN(testname)             { ut_##testname();}
-#define UTTOTALS()                  { printf("\r\n%s:%u %s: Count:%u Passed:%u Skipped:%u\r\n ",__FILE__,__LINE__, (__UTPassed==__UTTestCount) ? "PASS":"FAIL", __UTTestCount, __UTPassed, __UTSkipped);}
+#define UTTOTALS()                  { Util_Printf("\r\n%s:%u %s: Count:%u Passed:%u Skipped:%u\r\n ",__FILE__,__LINE__, (__UTPassed==__UTTestCount) ? "PASS":"FAIL", __UTTestCount, __UTPassed, __UTSkipped);}
 
+void ut_cs( void );
 
+#endif // UNIT_TEST_H

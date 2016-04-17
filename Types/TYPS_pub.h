@@ -7,6 +7,14 @@
     #define NULL        0
 #endif
 
+#if( !defined( TRUE ) )
+    #define TRUE        1
+#endif
+
+#if( !defined( FALSE ) )
+    #define FALSE       0
+#endif
+
 typedef int8_t      sint8;
 typedef uint8_t     uint8;
 
@@ -19,7 +27,7 @@ typedef uint32_t    uint32;
 typedef int64_t     sint64;
 typedef uint64_t    uint64;
 
-typedef uint8_t     boolean;
+typedef unsigned char boolean;
 
 
 #endif // TYPS_PUB_H

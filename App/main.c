@@ -6,6 +6,7 @@
  */
 #include "bsp.h"
 #include "print.h"
+#include "unittest.h"
 
 #include "TYPS_pub.h"
 #include "TASK_pub.h"
@@ -25,21 +26,10 @@ void main()
 
     PrintString(clr_scrn); /* Clear entire screen */
     PrintString("University of Washington - Debugger Test Application \n");
-    {
 
-        TASK_cs_err_type    err;
-        TASK_cs_type        myCS;
-        int x;
-
-        myCS.owner_id = 7;
-        myCS.signature = 0xabcdf00b;
-
-        err = InitializeCriticalSection( &myCS );
-        x =2;
-    }
-
-    PrintString("\nFail! Should not arrive here.\n");
-    while(1);
+    ut_cs();
+ 
+    PrintString("\nDone.\n");
 }
 
 

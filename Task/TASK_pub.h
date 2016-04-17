@@ -9,7 +9,6 @@ typedef uint32 TASK_id_type;
 
 typedef struct
     {
-    TASK_id_type    owner_id;
     uint32          signature;
     boolean         locked;
     } TASK_cs_type;
@@ -18,12 +17,13 @@ typedef uint8 TASK_cs_err_type; enum
     {
     TASK_CS_ERR_SUCCESS,
     TASK_CS_ERR_UNKNOWN,
+    TASK_CS_ERR_PARAM,
     TASK_CS_ERR_UN_INITED,
     TASK_CS_ERR_ALRDY_INITED,
-    TASK_CS_ERR_ALRDY_OWND,
+
+    TASK_CS_ERR_NOT_LOCKED,
+    TASK_CS_ERR_ALRDY_LOCKED,
     TASK_CS_ERR_BUSY,
-    TASK_CS_ERR_PARAM,
-    TASK_CS_ERR_NO_RSRCS,
 
     TASK_CS_ERR_NO_CNT
     };

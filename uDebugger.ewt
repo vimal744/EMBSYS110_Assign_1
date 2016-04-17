@@ -2099,6 +2099,12 @@
     <file>
       <name>$PROJ_DIR$\App\main.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\App\unittest.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\App\ut_cs.c</name>
+    </file>
   </group>
   <group>
     <name>BSP</name>
@@ -2193,7 +2199,7 @@
   <group>
     <name>Task</name>
     <file>
-      <name>$PROJ_DIR$\Task\TASK_cs.s</name>
+      <name>$PROJ_DIR$\Task\task_cs.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\Task\TASK_pub.h</name>

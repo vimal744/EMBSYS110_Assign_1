@@ -19,6 +19,8 @@ void Print_uint32(uint32_t u);
 void PrintByte(char c);
 void PrintString(char *ptr);
 
+void Util_Printf( char* format, ... );
+
 
 /* Macros ------------------------------------------------------------------- 
  * Macros for printing debug messages.

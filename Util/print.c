@@ -11,12 +11,18 @@ HISTORY     :
 *******************************************************************************/
 /* Includes ------------------------------------------------------------------*/
 #include "print.h"
+#include <stdarg.h>
+#include<stdio.h>
 
 /* Private define ------------------------------------------------------------*/
 #define BUFFER_LENGTH   20
 
+#define PRINTF_BUF_LENGTH 1024
+
+
 /* Private variables ---------------------------------------------------------*/
 char buffer[BUFFER_LENGTH];
+static char printf_buffer[PRINTF_BUF_LENGTH];
 
 void PrintHex(uint32_t u32) {
 uint32_t   u32Mask  = 0xF0000000;
@@ -60,4 +66,21 @@ void PrintString(char *ptr) {
       PrintByte(*ptr++);
     }
   } while (*ptr!=0);
+}
+
+
+
+void Util_Printf( char* format, ... )
+{
+    int         len;
+    va_list     args;
+
+    va_start( args, format );
+    len = vsnprintf( printf_buffer, PRINTF_BUF_LENGTH, format, args );
+    va_end( args );
+
+    if( -1 != len )
+    {
+        PrintString( printf_buffer );
+    }
 }
