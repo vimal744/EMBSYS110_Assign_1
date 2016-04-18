@@ -31,43 +31,48 @@ typedef uint8 TASK_cs_err_type; enum
 /**
  * Initialize a critical section object
  * \param pCS  Container for critical section object
- * \return    ERR_SUCCESS  Critical Section was initialized
- *            ERR_BUSY     Object was already initialized
- *            ERR_PARAM    The parameter was NULL
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section was initialized
+ *            TASK_CS_ERR_ALRDY_INITED      Object was already initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
  */
-extern TASK_cs_err_type InitializeCriticalSection(TASK_cs_type* pCS);
+extern TASK_cs_err_type TASK_cs_init(TASK_cs_type* pCS);
 
 /**
  * Attempt to take a critical section
  * \param pCS Initialized critical section object
- * \return    ERR_SUCCESS critical section is now owned by this thread
- *            ERR_ALREADY alredy owned by this thread
- *            ERR_BUSY    critical section is owned by another thread
- *            ERR_UNINIT  The critical section not ready
- *            ERR_PARAM   The parameter was NULL
- *            ERR_RESOURCES Out of resources
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section lock was obtained successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_ALRDY_LOCKED      object already locked by a thread
+ *            TASK_CS_ERR_BUSY              CPU error
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
  */
-TASK_cs_err_type EnterCriticalSection(TASK_cs_type* pCS);
+TASK_cs_err_type TASK_cs_enter(TASK_cs_type* pCS);
 
 
 /**
  * Release a critical section that was previously taken
  * \param pCS Initialized and owned critical section object
- * \return    ERR_SUCCESS critical section was released
- *            ERR_BUSY    critical section is owned by another thread, cannot be release here
- *            ERR_UNINIT  The critical section not ready
- *            ERR_PARAM   The parameter was NULL
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section lock was released successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_NOT_LOCKED        Object not locked by a thread
+ *            TASK_CS_ERR_BUSY              CPU error
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
  */
-TASK_cs_err_type LeaveCriticalSection(TASK_cs_type* pCS);
+TASK_cs_err_type TASK_cs_leave(TASK_cs_type* pCS);
 
 
 /**
  * Release any resources
  * \param pCS The object to cleanup
- * \return ERR_SUCCESS resources released
- *         ERR_BUSY    The object is currently taken by another thread (Discuss: should this be an error?)
- *         ERR_PARAM   parameter was NULL
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section deleted successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_ALRDY_LOCKED      Object locked by a thread
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
  */
-TASK_cs_err_type DeleteCriticalSection(TASK_cs_type* pCS);
+TASK_cs_err_type TASK_cs_delete(TASK_cs_type* pCS);
 
 #endif // TASK_PUB_H

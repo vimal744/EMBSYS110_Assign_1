@@ -7,7 +7,19 @@
 
 #include <string.h>
 
-TASK_cs_err_type InitializeCriticalSection(TASK_cs_type* pCS)
+/**
+ * Initialize a critical section object
+ * \description :
+ *   This function initalizes a critical section object
+ *
+ *
+ * \param pCS  Container for critical section object
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section was initialized
+ *            TASK_CS_ERR_ALRDY_INITED      Object was already initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
+ */
+TASK_cs_err_type TASK_cs_init(TASK_cs_type* pCS)
 {
     TASK_cs_err_type err;
 
@@ -34,7 +46,22 @@ TASK_cs_err_type InitializeCriticalSection(TASK_cs_type* pCS)
     return err;
 }
 
-TASK_cs_err_type EnterCriticalSection(TASK_cs_type* pCS)
+
+/**
+ * Attempt to take a critical section
+ * \description :
+ *   This function is used to lock a critical section object
+ *
+ * \param pCS Initialized critical section object
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section lock was obtained successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_ALRDY_LOCKED      object already locked by a thread
+ *            TASK_CS_ERR_BUSY              CPU error
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
+ */
+
+TASK_cs_err_type TASK_cs_enter(TASK_cs_type* pCS)
 {
     TASK_cs_err_type err;
 
@@ -80,7 +107,21 @@ TASK_cs_err_type EnterCriticalSection(TASK_cs_type* pCS)
 }
 
 
-TASK_cs_err_type LeaveCriticalSection(TASK_cs_type* pCS)
+/**
+ * Release a critical section that was previously taken
+ * \description :
+ *   This function is used to release a critical section object
+ *
+ * \param pCS Initialized and owned critical section object
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section lock was released successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_NOT_LOCKED        Object not locked by a thread
+ *            TASK_CS_ERR_BUSY              CPU error
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
+ */
+
+TASK_cs_err_type TASK_cs_leave(TASK_cs_type* pCS)
 {
     TASK_cs_err_type err;
 
@@ -125,7 +166,20 @@ TASK_cs_err_type LeaveCriticalSection(TASK_cs_type* pCS)
     return err;
 }
 
-TASK_cs_err_type DeleteCriticalSection(TASK_cs_type* pCS)
+/**
+ * Delete a critical section object
+ * \description :
+ *   This function is used to deletele a critical section object
+ *
+ * \param pCS The object to cleanup
+ * \return    TASK_CS_ERR_SUCCESS           Critical Section deleted successfully
+ *            TASK_CS_ERR_UN_INITED         Object was not initialized
+ *            TASK_CS_ERR_PARAM             The parameter was NULL
+ *            TASK_CS_ERR_ALRDY_LOCKED      Object locked by a thread
+ *            TASK_CS_ERR_UNKNOWN           Unknown error
+ */
+
+TASK_cs_err_type TASK_cs_delete(TASK_cs_type* pCS)
 {
     TASK_cs_err_type err;
 
@@ -160,7 +214,7 @@ TASK_cs_err_type DeleteCriticalSection(TASK_cs_type* pCS)
     }
 
     return err;
-    
+
 }
 
 
